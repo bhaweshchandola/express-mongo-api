@@ -42,4 +42,19 @@ router.post("/create", (req, res)=>{
     res.send({"status": "success"});
 })
 
+router.post("/update/:courseId", (req, res)=>{
+    // CourseModel.findByIdAndUpdate()
+    console.log(req.params.courseId);
+    console.log(req.body);
+    CourseModel.findByIdAndUpdate({_id: req.params.courseId}, {"courseName": req.body.name}, {upsert:true}, function(err, doc){
+        if (err) {
+            console.log(err);
+        }
+        else{
+            console.log(doc);
+        }
+    })
+    res.send({"status": "success"});
+})
+
 module.exports = router;
