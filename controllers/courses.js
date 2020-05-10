@@ -57,4 +57,19 @@ router.post("/update/:courseId", (req, res)=>{
     res.send({"status": "success"});
 })
 
+router.post("/delete/:courseId", (req, res)=>{
+    // CourseModel.findByIdAndUpdate()
+    console.log(req.params.courseId);
+    console.log(req.body);
+    CourseModel.findByIdAndRemove({_id: req.params.courseId}, function(err, doc){
+        if (err) {
+            console.log(err);
+        }
+        else{
+            console.log(doc);
+        }
+    })
+    res.send({"status": "success"});
+})
+
 module.exports = router;
